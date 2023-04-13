@@ -14,8 +14,10 @@ void Start()
     Console.Clear();
     int rows = SetNumber("m");
     int columns = SetNumber("n");
+    int min = SetNumber("min");
+    int max = SetNumber("max");
     Console.WriteLine();
-    int[,] matrix = GetMatrix(rows, columns);
+    double[,] matrix = GetMatrix(rows, columns, min, max);
     PrintMatrix(matrix);
     Console.WriteLine();
 }
@@ -26,20 +28,20 @@ int SetNumber(string text = "")
     int num = Convert.ToInt32(Console.ReadLine());
     return num;
 }
-double[,] GetMatrix(int rows, int columns)
+double[,] GetMatrix(int rows, int columns, int min, int max)
 {
     double[,] array = new double[rows, columns];
-    
+    var rand = new Random();
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < columns; j++)
         {
-            array[i, j] = Math.Round((randon.Next(minValue, maxValue ) + randon.NextDouble()),2);
+            array[i, j] = Math.Round((min + rand.NextDouble() * (max - min)),1);
         }
     }
     return array;
 }
-void PrintMatrix(int[,] matrix)
+void PrintMatrix(double[,] matrix)
 {
     for (int i = 0; i < matrix.GetLength(0); i++)
     {
